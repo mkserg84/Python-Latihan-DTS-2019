@@ -45,7 +45,6 @@ def VictoryFor(board,sgn):
 		who = 'you'	# yes - it's our side
 	else:
 		who = None	# we should not fall here!
-	cross1 = cross2 = True  # for diagonals
 	for rc in range(3):
 		if board[rc][0] == sgn and board[rc][1] == sgn and board[rc][2] == sgn:	# check row rc
 			return who
@@ -55,8 +54,11 @@ def VictoryFor(board,sgn):
 			cross1 = False
 		if board[2 - rc][2 - rc] != sgn: # check 2nd diagonal
 			cross2 = False
-	if cross1 or cross2:
-		return who
+        if board[0][0] == sgn and board[1][1] == sgn and board[2][2] == sgn:     # Left 2 right diagonal checking
+        	return who
+   	if board[2][0] == sgn and board[1][1] == sgn and board[0][2] == sgn:     # Right 2 left diagonal checking
+        	return who
+	
 	return None
 
 def DrawMove(board):
